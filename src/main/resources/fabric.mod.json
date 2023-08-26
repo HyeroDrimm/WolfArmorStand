@@ -3,13 +3,13 @@
 	"id": "horsearmorstandmod",
 	"version": "${version}",
 	"name": "Horse Armor Stand Mod",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Introducing: armor stand but now with horses",
 	"authors": [
-		"Me!"
+		"HyeroDrimm"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/HyeroDrimm/HorseArmorStandMod"
 	},
 	"license": "MIT Licence",
 	"icon": "assets/horsearmorstandmod/icon.png",
