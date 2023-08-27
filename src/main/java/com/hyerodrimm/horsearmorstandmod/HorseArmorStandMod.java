@@ -1,5 +1,6 @@
 package com.hyerodrimm.horsearmorstandmod;
 
+import com.hyerodrimm.horsearmorstandmod.entity.ModEntities;
 import com.hyerodrimm.horsearmorstandmod.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 
@@ -14,5 +15,6 @@ public class HorseArmorStandMod implements ModInitializer {
 	public void onInitialize() {
 		LOGGER.info("Hello Fabric world!");
 		ModItems.registerModItems();
+		ModEntities.registerModEntities();
 	}
 }
