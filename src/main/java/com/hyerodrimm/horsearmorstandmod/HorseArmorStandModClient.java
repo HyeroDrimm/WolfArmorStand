@@ -10,5 +10,6 @@ public class HorseArmorStandModClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ClientModEntities.registerModEntities();
+
     }
 }
