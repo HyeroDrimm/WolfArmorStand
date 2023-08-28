@@ -15,7 +15,7 @@ public class ModEntities {
     public static final EntityType<HorseArmorStandEntity> HORSE_ARMOR_STAND = Registry.register(
             Registries.ENTITY_TYPE,
             new Identifier(HorseArmorStandMod.MOD_ID, "horsearmorstandentity"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MISC, HorseArmorStandEntity::new).dimensions(EntityDimensions.fixed(0.75f, 0.75f)).build());
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, HorseArmorStandEntity::new).dimensions(EntityDimensions.fixed(1.375f, 1.375f)).build());
 
     public static void registerModEntities(){
         FabricDefaultAttributeRegistry.register(HORSE_ARMOR_STAND, HorseArmorStandEntity.createLivingAttributes());
