@@ -3,12 +3,13 @@
 	"id": "horsearmorstandmod",
 	"version": "${version}",
 	"name": "Horse Armor Stand Mod",
-	"description": "Introducing: armor stand but now with horses",
+	"description": "Introducing: Armor Stand, but now for Horses",
 	"authors": [
 		"HyeroDrimm"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
+		"homepage": "https://www.curseforge.com/minecraft/mc-mods/horsestandmod",
+		"issues": "https://github.com/HyeroDrimm/HorseArmorStandMod/issues",
 		"sources": "https://github.com/HyeroDrimm/HorseArmorStandMod"
 	},
 	"license": "MIT Licence",
@@ -32,9 +33,9 @@
 		"fabricloader": ">=0.14.22",
 		"minecraft": "~1.20.1",
 		"java": ">=17",
-		"fabric-api": "*"
+		"fabric-api": "*",
+		"geckolib": "*"
 	},
 	"suggests": {
-		"another-mod": "*"
 	}
 }

@@ -86,7 +86,7 @@ public class HorseArmorStandEntity extends LivingEntity implements GeoEntity {
     public static final TrackedData<EulerAngle> TRACKER_RIGHT_ARM_ROTATION = DataTracker.registerData(ArmorStandEntity.class, TrackedDataHandlerRegistry.ROTATION);
     public static final TrackedData<EulerAngle> TRACKER_LEFT_LEG_ROTATION = DataTracker.registerData(ArmorStandEntity.class, TrackedDataHandlerRegistry.ROTATION);
     public static final TrackedData<EulerAngle> TRACKER_RIGHT_LEG_ROTATION = DataTracker.registerData(ArmorStandEntity.class, TrackedDataHandlerRegistry.ROTATION);*/
-    private static final Predicate<Entity> RIDEABLE_MINECART_PREDICATE = entity -> entity instanceof AbstractMinecartEntity && ((AbstractMinecartEntity)entity).getMinecartType() == AbstractMinecartEntity.Type.RIDEABLE;
+    private static final Predicate<Entity> RIDEABLE_MINECART_PREDICATE = entity -> entity instanceof AbstractMinecartEntity && ((AbstractMinecartEntity) entity).getMinecartType() == AbstractMinecartEntity.Type.RIDEABLE;
     private final DefaultedList<ItemStack> armorItems = DefaultedList.ofSize(4, ItemStack.EMPTY);
     private boolean invisible;
     public long lastHitTime;
@@ -100,7 +100,7 @@ public class HorseArmorStandEntity extends LivingEntity implements GeoEntity {
     private EulerAngle rightLegRotation = DEFAULT_RIGHT_LEG_ROTATION;*/
 
     public HorseArmorStandEntity(EntityType<? extends HorseArmorStandEntity> entityType, World world) {
-        super((EntityType<? extends LivingEntity>)entityType, world);
+        super((EntityType<? extends LivingEntity>) entityType, world);
         this.setStepHeight(0.0f);
     }
 
@@ -130,7 +130,7 @@ public class HorseArmorStandEntity extends LivingEntity implements GeoEntity {
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
-        this.dataTracker.startTracking(HORSE_ARMOR_STAND_FLAGS, (byte)0);
+        this.dataTracker.startTracking(HORSE_ARMOR_STAND_FLAGS, (byte) 0);
         // POSES
 /*        this.dataTracker.startTracking(TRACKER_HEAD_ROTATION, DEFAULT_HEAD_ROTATION);
         this.dataTracker.startTracking(TRACKER_BODY_ROTATION, DEFAULT_BODY_ROTATION);
@@ -145,7 +145,9 @@ public class HorseArmorStandEntity extends LivingEntity implements GeoEntity {
         return this.armorItems;
     }
 
-    public ItemStack getArmorType(){ return this.getEquippedStack(EquipmentSlot.CHEST);}
+    public ItemStack getArmorType() {
+        return this.getEquippedStack(EquipmentSlot.CHEST);
+    }
 
     @Override
     public ItemStack getEquippedStack(EquipmentSlot slot) {
@@ -289,15 +291,11 @@ public class HorseArmorStandEntity extends LivingEntity implements GeoEntity {
             return ActionResult.CONSUME;
         }
 
-        if (itemStack.isEmpty()){
-/*            EquipmentSlot equipmentSlot3;
-            EquipmentSlot equipmentSlot2 = this.getSlotFromPosition(hitPos);
-            equipmentSlot3 = this.isSlotDisabled(equipmentSlot2) ? equipmentSlot : equipmentSlot2;*/
+        if (itemStack.isEmpty()) {
             if (this.hasStackEquipped(EquipmentSlot.CHEST) && this.equip(player, EquipmentSlot.CHEST, itemStack, hand)) {
                 return ActionResult.SUCCESS;
             }
-        }
-        else if (HorseArmorItem.class.isAssignableFrom(itemStack.getItem().getClass()) && this.getArmorType().isEmpty() && !this.isSlotDisabled(EquipmentSlot.CHEST)){
+        } else if (itemStack.getItem() instanceof HorseArmorItem && !this.isSlotDisabled(EquipmentSlot.CHEST)) {
             if (this.isSlotDisabled(EquipmentSlot.CHEST)) {
                 return ActionResult.FAIL;
             }
@@ -306,59 +304,7 @@ public class HorseArmorStandEntity extends LivingEntity implements GeoEntity {
             }
         }
 
-/*        EquipmentSlot equipmentSlot = MobEntity.getPreferredEquipmentSlot(itemStack);
-        if (itemStack.isEmpty()) {
-            EquipmentSlot equipmentSlot3;
-            EquipmentSlot equipmentSlot2 = this.getSlotFromPosition(hitPos);
-            equipmentSlot3 = this.isSlotDisabled(equipmentSlot2) ? equipmentSlot : equipmentSlot2;
-            if (this.hasStackEquipped(equipmentSlot3) && this.equip(player, equipmentSlot3, itemStack, hand)) {
-                return ActionResult.SUCCESS;
-            }
-        } else {
-            if (this.isSlotDisabled(equipmentSlot)) {
-                return ActionResult.FAIL;
-            }
-            if (this.equip(player, equipmentSlot, itemStack, hand)) {
-                return ActionResult.SUCCESS;
-            }
-        }*/
         return ActionResult.PASS;
-    }
-
-    /*
-     * Enabled force condition propagation
-     * Lifted jumps to return sites
-     */
-    private EquipmentSlot getSlotFromPosition(Vec3d hitPos) {
-        EquipmentSlot equipmentSlot = EquipmentSlot.MAINHAND;
-        boolean bl = this.isSmall();
-        double d = bl ? hitPos.y * 2.0 : hitPos.y;
-        EquipmentSlot equipmentSlot2 = EquipmentSlot.FEET;
-        if (d >= 0.1) {
-            double d2 = bl ? 0.8 : 0.45;
-            if (d < 0.1 + d2 && this.hasStackEquipped(equipmentSlot2)) {
-                return EquipmentSlot.FEET;
-            }
-        }
-        double d3 = bl ? 0.3 : 0.0;
-        if (d >= 0.9 + d3) {
-            double d4 = bl ? 1.0 : 0.7;
-            if (d < 0.9 + d4 && this.hasStackEquipped(EquipmentSlot.CHEST)) {
-                return EquipmentSlot.CHEST;
-            }
-        }
-        if (d >= 0.4) {
-            double d5 = bl ? 1.0 : 0.8;
-            if (d < 0.4 + d5 && this.hasStackEquipped(EquipmentSlot.LEGS)) {
-                return EquipmentSlot.LEGS;
-            }
-        }
-        if (d >= 1.6 && this.hasStackEquipped(EquipmentSlot.HEAD)) {
-            return EquipmentSlot.HEAD;
-        }
-        if (this.hasStackEquipped(EquipmentSlot.MAINHAND)) return equipmentSlot;
-        if (!this.hasStackEquipped(EquipmentSlot.OFFHAND)) return equipmentSlot;
-        return EquipmentSlot.OFFHAND;
     }
 
     private boolean isSlotDisabled(EquipmentSlot slot) {
@@ -419,14 +365,14 @@ public class HorseArmorStandEntity extends LivingEntity implements GeoEntity {
             return false;
         }
         boolean bl = source.getSource() instanceof PersistentProjectileEntity;
-        boolean bl2 = bl && ((PersistentProjectileEntity)source.getSource()).getPierceLevel() > 0;
+        boolean bl2 = bl && ((PersistentProjectileEntity) source.getSource()).getPierceLevel() > 0;
         boolean bl3 = "player".equals(source.getName());
         if (!bl3 && !bl) {
             return false;
         }
         Entity entity = source.getAttacker();
         if (entity instanceof PlayerEntity) {
-            PlayerEntity playerEntity = (PlayerEntity)entity;
+            PlayerEntity playerEntity = (PlayerEntity) entity;
             if (!playerEntity.getAbilities().allowModifyWorld) {
                 return false;
             }
@@ -473,7 +419,7 @@ public class HorseArmorStandEntity extends LivingEntity implements GeoEntity {
 
     private void spawnBreakParticles() {
         if (this.getWorld() instanceof ServerWorld) {
-            ((ServerWorld)this.getWorld()).spawnParticles(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.OAK_PLANKS.getDefaultState()), this.getX(), this.getBodyY(0.6666666666666666), this.getZ(), 10, this.getWidth() / 4.0f, this.getHeight() / 4.0f, this.getWidth() / 4.0f, 0.05);
+            ((ServerWorld) this.getWorld()).spawnParticles(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.OAK_PLANKS.getDefaultState()), this.getX(), this.getBodyY(0.6666666666666666), this.getZ(), 10, this.getWidth() / 4.0f, this.getHeight() / 4.0f, this.getWidth() / 4.0f, 0.05);
         }
     }
 
@@ -528,7 +474,7 @@ public class HorseArmorStandEntity extends LivingEntity implements GeoEntity {
 
     @Override
     public double getHeightOffset() {
-        return this.isMarker() ? 0.0 : (double)0.1f;
+        return this.isMarker() ? 0.0 : (double) 0.1f;
     }
 
     @Override
@@ -647,7 +593,7 @@ public class HorseArmorStandEntity extends LivingEntity implements GeoEntity {
     }
 
     private byte setBitField(byte value, int bitField, boolean set) {
-        value = set ? (byte)(value | bitField) : (byte)(value & ~bitField);
+        value = set ? (byte) (value | bitField) : (byte) (value & ~bitField);
         return value;
     }
 
@@ -713,7 +659,7 @@ public class HorseArmorStandEntity extends LivingEntity implements GeoEntity {
 
     @Override
     public boolean handleAttack(Entity attacker) {
-        return attacker instanceof PlayerEntity && !this.getWorld().canPlayerModifyAt((PlayerEntity)attacker, this.getBlockPos());
+        return attacker instanceof PlayerEntity && !this.getWorld().canPlayerModifyAt((PlayerEntity) attacker, this.getBlockPos());
     }
 
     @Override
@@ -808,8 +754,8 @@ public class HorseArmorStandEntity extends LivingEntity implements GeoEntity {
         controllerRegistrar.add(new AnimationController<>(this, "controller", 0, this::predicate));
     }
 
-    private <T extends GeoAnimatable> PlayState predicate(final AnimationState<T> tAnimationState){
-        if (playSwayAnimation){
+    private <T extends GeoAnimatable> PlayState predicate(final AnimationState<T> tAnimationState) {
+        if (playSwayAnimation) {
             playSwayAnimation = false;
             return tAnimationState.setAndContinue(SWAY_ANIMATION);
         }
