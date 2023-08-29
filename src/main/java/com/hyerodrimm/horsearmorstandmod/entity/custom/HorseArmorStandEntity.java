@@ -145,6 +145,8 @@ public class HorseArmorStandEntity extends LivingEntity implements GeoEntity {
         return this.armorItems;
     }
 
+    public ItemStack getArmorType(){ return this.getEquippedStack(EquipmentSlot.CHEST);}
+
     @Override
     public ItemStack getEquippedStack(EquipmentSlot slot) {
         switch (slot.getType()) {
@@ -167,8 +169,7 @@ public class HorseArmorStandEntity extends LivingEntity implements GeoEntity {
 
     @Override
     public boolean canEquip(ItemStack stack) {
-        HorseArmorStandMod.LOGGER.info("item is of armor stand item: " + (stack.getItem() instanceof ArmorStandItem));
-        return !stack.isEmpty() && stack.getItem() instanceof HorseArmorItem && this.getEquippedStack(EquipmentSlot.CHEST).isEmpty() && !this.isSlotDisabled(EquipmentSlot.CHEST);
+        return !stack.isEmpty() && stack.getItem() instanceof HorseArmorItem && this.getArmorType().isEmpty() && !this.isSlotDisabled(EquipmentSlot.CHEST);
     }
 
     @Override
@@ -296,7 +297,7 @@ public class HorseArmorStandEntity extends LivingEntity implements GeoEntity {
                 return ActionResult.SUCCESS;
             }
         }
-        else if (HorseArmorItem.class.isAssignableFrom(itemStack.getItem().getClass()) && this.getEquippedStack(EquipmentSlot.CHEST).isEmpty() && !this.isSlotDisabled(EquipmentSlot.CHEST)){
+        else if (HorseArmorItem.class.isAssignableFrom(itemStack.getItem().getClass()) && this.getArmorType().isEmpty() && !this.isSlotDisabled(EquipmentSlot.CHEST)){
             if (this.isSlotDisabled(EquipmentSlot.CHEST)) {
                 return ActionResult.FAIL;
             }
