@@ -44,10 +44,8 @@ import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 
 import java.util.List;
@@ -57,6 +55,8 @@ import static org.apache.commons.lang3.Validate.isAssignableFrom;
 
 public class HorseArmorStandEntity extends LivingEntity implements GeoEntity {
     protected static final RawAnimation IDLE_ANIMATION = RawAnimation.begin().thenLoop("animation.horsearmorstand.idle");
+    protected static final RawAnimation SWAY_ANIMATION = RawAnimation.begin().then("animation.horsearmorstand.sway", Animation.LoopType.PLAY_ONCE);
+    private boolean playSwayAnimation = false;
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     public static final int field_30443 = 5;
     private static final boolean field_30445 = true;
@@ -288,7 +288,6 @@ public class HorseArmorStandEntity extends LivingEntity implements GeoEntity {
             return ActionResult.CONSUME;
         }
 
-        HorseArmorStandMod.LOGGER.info("item is of armor stand item: " + (HorseArmorItem.class.isAssignableFrom(itemStack.getItem().getClass())));
         if (itemStack.isEmpty()){
 /*            EquipmentSlot equipmentSlot3;
             EquipmentSlot equipmentSlot2 = this.getSlotFromPosition(hitPos);
@@ -809,12 +808,21 @@ public class HorseArmorStandEntity extends LivingEntity implements GeoEntity {
     }
 
     private <T extends GeoAnimatable> PlayState predicate(final AnimationState<T> tAnimationState){
-        tAnimationState.getController().setAnimation(IDLE_ANIMATION);
+        if (playSwayAnimation){
+            playSwayAnimation = false;
+            return tAnimationState.setAndContinue(SWAY_ANIMATION);
+        }
+        //tAnimationState.getController().setAnimation(IDLE_ANIMATION);
+        tAnimationState.getController().forceAnimationReset();
         return PlayState.CONTINUE;
     }
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
+    }
+
+    public void SetPlaySwayAnimation(boolean b) {
+        playSwayAnimation = b;
     }
 }
