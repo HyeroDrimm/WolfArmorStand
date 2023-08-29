@@ -168,7 +168,7 @@ public class HorseArmorStandEntity extends LivingEntity implements GeoEntity {
     @Override
     public boolean canEquip(ItemStack stack) {
         HorseArmorStandMod.LOGGER.info("item is of armor stand item: " + (stack.getItem() instanceof ArmorStandItem));
-        return !stack.isEmpty() && stack.getItem() instanceof ArmorStandItem && this.getEquippedStack(EquipmentSlot.CHEST).isEmpty() && !this.isSlotDisabled(EquipmentSlot.CHEST);
+        return !stack.isEmpty() && stack.getItem() instanceof HorseArmorItem && this.getEquippedStack(EquipmentSlot.CHEST).isEmpty() && !this.isSlotDisabled(EquipmentSlot.CHEST);
     }
 
     @Override

@@ -3,9 +3,11 @@ package com.hyerodrimm.horsearmorstandmod.renderer;
 import com.hyerodrimm.horsearmorstandmod.HorseArmorStandMod;
 import com.hyerodrimm.horsearmorstandmod.entity.custom.HorseArmorStandEntity;
 import com.hyerodrimm.horsearmorstandmod.model.HorseArmorStandEntityModel;
+import com.hyerodrimm.horsearmorstandmod.renderer.layer.HorseArmorStandArmorRenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
@@ -14,6 +16,7 @@ public class HorseArmorStandEntityRenderer extends GeoEntityRenderer<HorseArmorS
 
     public HorseArmorStandEntityRenderer(EntityRendererFactory.Context renderManager) {
         super(renderManager, new HorseArmorStandEntityModel());
+        this.addRenderLayer(new HorseArmorStandArmorRenderLayer(this));
     }
 
     @Override
