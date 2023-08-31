@@ -11,6 +11,7 @@ import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 public class HorseArmorStandModClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        HorseArmorStandMod.LOGGER.info("Initialize client for " + HorseArmorStandMod.MOD_ID);
         ClientModEntities.registerModEntities();
 
         AttackEntityCallback.EVENT.register(new AttackEntityEventHandler());
