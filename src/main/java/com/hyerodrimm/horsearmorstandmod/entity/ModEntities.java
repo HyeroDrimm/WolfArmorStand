@@ -18,6 +18,8 @@ public class ModEntities {
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, HorseArmorStandEntity::new).dimensions(EntityDimensions.fixed(1.375f, 1.375f)).build());
 
     public static void registerModEntities(){
+        HorseArmorStandMod.LOGGER.info("Registering Mod Entities for" + HorseArmorStandMod.MOD_ID);
+
         FabricDefaultAttributeRegistry.register(HORSE_ARMOR_STAND, HorseArmorStandEntity.createLivingAttributes());
     }
 }
