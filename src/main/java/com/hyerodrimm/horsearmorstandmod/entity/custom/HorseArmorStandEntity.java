@@ -54,12 +54,9 @@ import java.util.function.Predicate;
 import static org.apache.commons.lang3.Validate.isAssignableFrom;
 
 public class HorseArmorStandEntity extends LivingEntity implements GeoEntity {
-    protected static final RawAnimation IDLE_ANIMATION = RawAnimation.begin().thenLoop("animation.horsearmorstand.idle");
     protected static final RawAnimation SWAY_ANIMATION = RawAnimation.begin().then("animation.horsearmorstand.sway", Animation.LoopType.PLAY_ONCE);
     private boolean playSwayAnimation = false;
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    public static final int field_30443 = 5;
-    private static final boolean field_30445 = true;
     // POSES
     /*private static final EulerAngle DEFAULT_HEAD_ROTATION = new EulerAngle(0.0f, 0.0f, 0.0f);
     private static final EulerAngle DEFAULT_BODY_ROTATION = new EulerAngle(0.0f, 0.0f, 0.0f);
@@ -69,12 +66,6 @@ public class HorseArmorStandEntity extends LivingEntity implements GeoEntity {
     private static final EulerAngle DEFAULT_RIGHT_LEG_ROTATION = new EulerAngle(1.0f, 0.0f, 1.0f);*/
     private static final EntityDimensions MARKER_DIMENSIONS = new EntityDimensions(0.0f, 0.0f, true);
     private static final EntityDimensions SMALL_DIMENSIONS = ModEntities.HORSE_ARMOR_STAND.getDimensions().scaled(0.5f);
-    private static final double field_30447 = 0.1;
-    private static final double field_30448 = 0.9;
-    private static final double field_30449 = 0.4;
-    private static final double field_30450 = 1.6;
-    public static final int field_30446 = 8;
-    public static final int field_30451 = 16;
     public static final int SMALL_FLAG = 1;
     public static final int HIDE_BASE_PLATE_FLAG = 8;
     public static final int MARKER_FLAG = 16;
