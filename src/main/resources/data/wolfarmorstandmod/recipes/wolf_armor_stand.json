@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "_": {
+      "item": "minecraft:smooth_stone_slab"
+    },
+    "#": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "/  ",
+    "###",
+    "/_/"
+  ],
+  "result": {
+    "item": "wolfarmorstandmod:wolfarmorstanditem"
+  },
+  "show_notification": true
+}

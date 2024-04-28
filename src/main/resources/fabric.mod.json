@@ -1,38 +1,39 @@
 {
 	"schemaVersion": 1,
-	"id": "horsearmorstandmod",
+	"id": "wolfarmorstandmod",
 	"version": "${version}",
-	"name": "Horse Armor Stand Mod",
-	"description": "Introducing: Armor Stand, but now for Horses",
+	"name": "Wolf Armor Stand Mod",
+	"description": "Now you can stand those wolf armors!",
 	"authors": [
 		"HyeroDrimm"
 	],
 	"contact": {
-		"homepage": "https://modrinth.com/mod/horse-armor-stand",
+		"homepage": "https://modrinth.com/project/wolf-armor-stand",
 		"issues": "https://github.com/HyeroDrimm/HorseArmorStandMod/issues",
 		"sources": "https://github.com/HyeroDrimm/HorseArmorStandMod"
 	},
 	"license": "MIT Licence",
-	"icon": "assets/horsearmorstandmod/icon.png",
+	"icon": "assets/wolfarmorstandmod/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.hyerodrimm.horsearmorstandmod.HorseArmorStandMod"
+          "com.hyerodrimm.wolfarmorstandmod.WolfArmorStandMod"
 		],
 		"client": [
-			"com.hyerodrimm.horsearmorstandmod.HorseArmorStandModClient"
+			"com.hyerodrimm.wolfarmorstandmod.WolfArmorStandModClient"
 		]
 	},
 	"mixins": [
 		"horsearmorstandmod.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.14.22",
-		"minecraft": ">=1.19.4",
-		"java": ">=17",
+		"fabricloader": ">=0.15.10",
+		"minecraft": ">=1.20.5",
+		"java": ">=21",
 		"fabric-api": "*",
 		"geckolib": "*"
 	},
 	"suggests": {
+		"horsearmorstand": "*"
 	}
 }
