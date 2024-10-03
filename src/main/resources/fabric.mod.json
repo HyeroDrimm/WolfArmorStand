@@ -3,9 +3,10 @@
 	"id": "wolfarmorstand",
 	"version": "${version}",
 	"name": "Wolf Armor Stand",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Throwing you a bone with this Wolf Armor Stand Mod!",
 	"authors": [
-		"HyeroDrimm"
+		"HyeroDrimm",
+		"Vinsza"
 	],
 	"contact": {
 		"homepage": "https://modrinth.com/mod/wolf-armor-stand",
